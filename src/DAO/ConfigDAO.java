@@ -1,6 +1,6 @@
 package DAO;
 
-import entity.Config;
+import Entity.Config;
 import utils.databaseUtil;
 
 import java.sql.*;

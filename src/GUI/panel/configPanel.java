@@ -1,5 +1,7 @@
 package GUI.panel;
 
+import GUI.listener.ConfigUpdateListener;
+import Service.ConfigService;
 import utils.GUIUtil;
 import utils.colorUtil;
 
@@ -12,19 +14,20 @@ public class configPanel extends JPanel {
     }
     public static configPanel instance = new configPanel();
 
-    JLabel lBudget = new JLabel("每月预算");
-    JTextField tBudget = new JTextField();
-    JLabel lMode = new JLabel("模式设置");
-    JRadioButton bSafe = new JRadioButton("安全模式");
-    JRadioButton bFree = new JRadioButton("自由模式");
-    JLabel lMysqlPath = new JLabel("Mysql路径");
-    JTextField tMysqlPath = new JTextField();
+    public JLabel lBudget = new JLabel("每月预算");
+    public JTextField tBudget = new JTextField(ConfigService.budgetDefaultValue);
+    public JLabel lMode = new JLabel("模式设置");
+    public JRadioButton bSafe = new JRadioButton("安全模式");
+    public JRadioButton bFree = new JRadioButton("自由模式");
+    public JLabel lMysqlPath = new JLabel("Mysql路径");
+    public JTextField tMysqlPath = new JTextField(ConfigService.mysqlPathDefaultValue);
     JButton bUpdate = new JButton("更新");
 
     private configPanel(){
         this.setLayout(new BorderLayout());
         this.add(center(), BorderLayout.CENTER);
         this.add(south(),BorderLayout.SOUTH);
+        addListener();
     }
 
     private JPanel center(){
@@ -35,6 +38,7 @@ public class configPanel extends JPanel {
         bg.add(bFree);
         bp.add(bSafe);
         bp.add(bFree);
+        bSafe.setSelected(ConfigService.modeDefaultValue == "安全模式");
 
         JPanel p = new JPanel();
         p.setLayout(new GridLayout(6,1,20,20));
@@ -51,6 +55,11 @@ public class configPanel extends JPanel {
         JPanel p = new JPanel();
         p.add(bUpdate);
         return p;
+    }
+
+    private void addListener(){
+        ConfigUpdateListener configListener = new ConfigUpdateListener();
+        bUpdate.addActionListener(configListener);
     }
 
     public static void main(String[] args) {

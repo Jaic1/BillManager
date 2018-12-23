@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class categoryTableModel implements TableModel {
-    public String[] columnNames = new String[]{"分类名称","消费次数","消费总额"};
+    public String[] columnNames = new String[]{"分类名称","消费次数","消费总额","单笔消费上限"};
     List<String> cs = new ArrayList<>();
 
     public categoryTableModel() {

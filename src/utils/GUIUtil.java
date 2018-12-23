@@ -55,6 +55,44 @@ public class GUIUtil {
         }
     }
 
+    //检查是否数，是否空，是否零等
+    //传入的参数为JTextField控件和它的名称
+    public static boolean checkEmpty(JTextField textField,String name){
+        String text = textField.getText().trim();
+        if(text.length() == 0){
+            JOptionPane.showMessageDialog(null,name+"不能为空");
+            textField.grabFocus();
+            return false;
+        }
+        return true;
+    }
+    public static boolean checkNumber(JTextField textField,String name){
+        if(!checkEmpty(textField,name)){
+            return false;
+        }
+        String text = textField.getText().trim();
+        try{
+            Integer.parseInt(text);
+            return true;
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null,name+"需要是整数");
+            textField.grabFocus();
+            return false;
+        }
+    }
+    public static boolean checkZero(JTextField textField,String name){
+        if(!checkNumber(textField,name)){
+            return false;
+        }
+        String text = textField.getText().trim();
+        if(Integer.parseInt(text) == 0){
+            JOptionPane.showMessageDialog(null,name+"输入不能为0");
+            textField.grabFocus();
+            return false;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         testComponent(new JButton("testing"),1.0f);
     }

@@ -1,11 +1,9 @@
 package DAO;
 
-import com.sun.org.apache.regexp.internal.RE;
-import entity.Record;
+import Entity.Record;
 import utils.databaseUtil;
 import utils.dateUtil;
 
-import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;

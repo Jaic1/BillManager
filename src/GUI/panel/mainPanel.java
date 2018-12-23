@@ -1,5 +1,6 @@
 package GUI.panel;
 
+import GUI.listener.ToolBarListener;
 import utils.GUIUtil;
 import utils.centerPanel;
 
@@ -21,7 +22,7 @@ public class mainPanel extends JPanel {
     public JButton bConfig = new JButton();
     public JButton bBackup = new JButton();
     public JButton bRecover = new JButton();
-    public centerPanel workingPanel = new centerPanel(0.8);
+    public centerPanel workingPanel = new centerPanel(0.85);
 
     private mainPanel(){
         GUIUtil.setImgIcon(bOverview,"home.png","血腥场面");
@@ -44,6 +45,18 @@ public class mainPanel extends JPanel {
         setLayout(new BorderLayout());
         add(toolBar, BorderLayout.NORTH);
         add(workingPanel, BorderLayout.CENTER);
+        addListener();
+    }
+
+    private void addListener(){
+        ToolBarListener toolBarListener = new ToolBarListener();
+        bOverview.addActionListener(toolBarListener);
+        bRecord.addActionListener(toolBarListener);
+        bCategory.addActionListener(toolBarListener);
+        bRecord.addActionListener(toolBarListener);
+        bConfig.addActionListener(toolBarListener);
+        bBackup.addActionListener(toolBarListener);
+        bRecover.addActionListener(toolBarListener);
     }
 
     public static void main(String[] args) {

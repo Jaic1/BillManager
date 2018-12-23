@@ -1,25 +1,24 @@
 package DAO;
 
-import entity.Category;
-import entity.Record;
+import Entity.Category;
 import utils.databaseUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CategoryDAO {
 
     //增
     public void add(Category category){
-        String addSQL = "insert into category values(null,?,?,?)";
+        String addSQL = "insert into category values(null,?,?,?,?)";
         try(Connection connection = databaseUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(addSQL);
         ) {
             ps.setString(1,category.getName());
             ps.setInt(2,category.getNum());
             ps.setFloat(3,category.getSum());
+            ps.setFloat(4,category.getUpperBound());
             ps.execute();
             ResultSet resultSet = ps.getGeneratedKeys();
             if(resultSet.next()){
@@ -44,14 +43,15 @@ public class CategoryDAO {
 
     //改
     public void update(Category category){
-        String updateSQL = "update category set name=?, num=?, sum=? where id=?";
+        String updateSQL = "update category set name=?, num=?, sum=?, upperBound=? where id=?";
         try(Connection connection = databaseUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(updateSQL);
         ) {
             ps.setString(1,category.getName());
             ps.setInt(2,category.getNum());
             ps.setFloat(3,category.getSum());
-            ps.setInt(4,category.getId());
+            ps.setFloat(4,category.getUpperBound());
+            ps.setInt(5,category.getId());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,6 +71,7 @@ public class CategoryDAO {
                 category.setName(resultSet.getString("name"));
                 category.setNum(resultSet.getInt("num"));
                 category.setSum(resultSet.getFloat("sum"));
+                category.setUpperBound(resultSet.getFloat("upperBound"));
                 return category;
             }
         } catch (SQLException e) {
@@ -92,6 +93,7 @@ public class CategoryDAO {
                 category.setName(name);
                 category.setNum(resultSet.getInt("num"));
                 category.setSum(resultSet.getFloat("sum"));
+                category.setUpperBound(resultSet.getFloat("upperBound"));
                 return category;
             }
         } catch (SQLException e) {
@@ -119,6 +121,7 @@ public class CategoryDAO {
                 category.setName(resultSet.getString("name"));
                 category.setNum(resultSet.getInt("num"));
                 category.setSum(resultSet.getFloat("sum"));
+                category.setUpperBound(resultSet.getFloat("upperBound"));
                 categories.add(category);
             }
         } catch (SQLException e) {

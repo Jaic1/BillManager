@@ -12,15 +12,16 @@ public class databaseUtil {
             e.printStackTrace();
         }
     }
-    public static String ip = "127.0.0.1";
-    public static int port = 3306;
-    public static String databaseName = "billmanager";
-    public static String encoding = "UTF-8";
+    //public static String ip = "127.0.0.1";
+    //public static int port = 3306;
+    //public static String databaseName = "billmanager";
+    //public static String encoding = "UTF-8";
     public static String account = "root";
     public static String password = "admin";
 
     public static Connection getConnection() throws SQLException{
-        String sql = String.format("jdbc:mysql://%s:%d/%s?characterEncoding=%s&&serverTimezone=GMT%2B8",ip,port,databaseName,encoding);
-        return DriverManager.getConnection(sql,account,password);
+        //String sql = String.format("jdbc:mysql://%s:%d/%s?characterEncoding=%s&serverTimezone=GMT%2B8",ip,port,databaseName,encoding);
+        return DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/billmanager?characterEncoding=UTF-8&serverTimezone=GMT%2B8",
+                account,password);
     }
 }
