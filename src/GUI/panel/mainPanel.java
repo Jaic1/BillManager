@@ -53,7 +53,7 @@ public class mainPanel extends JPanel {
         bOverview.addActionListener(toolBarListener);
         bRecord.addActionListener(toolBarListener);
         bCategory.addActionListener(toolBarListener);
-        bRecord.addActionListener(toolBarListener);
+        bReport.addActionListener(toolBarListener);
         bConfig.addActionListener(toolBarListener);
         bBackup.addActionListener(toolBarListener);
         bRecover.addActionListener(toolBarListener);

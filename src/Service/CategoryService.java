@@ -10,6 +10,9 @@ import java.util.List;
 public class CategoryService {
     RecordDAO recordDAO = new RecordDAO();
     CategoryDAO categoryDAO = new CategoryDAO();
+    //理想的用法是：
+    //每次new一个CategoryService
+    //然后用list()
 
     //查询全部
     public List<Category> list(){

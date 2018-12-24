@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class categoryTableModel extends AbstractTableModel {
-    public String[] columnNames = new String[]{"分类名称","消费次数","消费总额","单笔消费上限"};
+    public String[] columnNames = new String[]{"分类名称","消费次数","消费总额","单笔上限"};
     public List<Category> cs = new CategoryService().list();
 
     @Override

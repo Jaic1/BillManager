@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class RecordDAO {
 
@@ -38,6 +39,18 @@ public class RecordDAO {
             Statement s = connection.createStatement();
         ) {
             s.execute(deleteSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //按分类删除
+    public void deleteByCategory(int cid){
+        String deleteByCategorySQL = "delete from record where cid = " + cid;
+        try(Connection connection = databaseUtil.getConnection();
+            Statement s = connection.createStatement();
+        ) {
+            s.execute(deleteByCategorySQL);
         } catch (SQLException e) {
             e.printStackTrace();
         }

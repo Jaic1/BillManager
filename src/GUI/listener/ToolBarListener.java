@@ -19,10 +19,11 @@ public class ToolBarListener implements ActionListener {
             p.workingPanel.show(recordPanel.instance);
         }
         if(button == p.bCategory){
+
             p.workingPanel.show(categoryPanel.instance);
         }
         if(button == p.bReport){
-            p.workingPanel.show(recordPanel.instance);
+            p.workingPanel.show(reportPanel.instance);
         }
         if(button == p.bConfig){
             p.workingPanel.show(configPanel.instance);

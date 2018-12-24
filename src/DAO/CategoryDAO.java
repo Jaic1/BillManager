@@ -35,7 +35,7 @@ public class CategoryDAO {
         try(Connection connection = databaseUtil.getConnection();
             Statement s = connection.createStatement();
         ) {
-            s.executeQuery(deleteSQL);
+            s.execute(deleteSQL);
         } catch (SQLException e) {
             e.printStackTrace();
         }
