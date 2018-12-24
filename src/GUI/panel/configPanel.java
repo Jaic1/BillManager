@@ -9,19 +9,19 @@ import utils.colorUtil;
 import javax.swing.*;
 import java.awt.*;
 
-public class configPanel extends JPanel {
+public class configPanel extends workingPanel {
     static {
         GUIUtil.useLNF();
     }
     public static configPanel instance = new configPanel();
 
     public JLabel lBudget = new JLabel("每月预算");
-    public JTextField tBudget = new JTextField(ConfigService.budgetValue);
+    public JTextField tBudget = new JTextField();
     public JLabel lMode = new JLabel("模式设置");
     public JRadioButton bSafe = new JRadioButton("安全模式");
     public JRadioButton bFree = new JRadioButton("自由模式");
     public JLabel lMysqlPath = new JLabel("Mysql路径");
-    public JTextField tMysqlPath = new JTextField(ConfigService.mysqlPathValue);
+    public JTextField tMysqlPath = new JTextField();
     JButton bReset = new JButton("重置");
     JButton bUpdate = new JButton("更新");
 
@@ -40,9 +40,6 @@ public class configPanel extends JPanel {
         bg.add(bFree);
         bp.add(bSafe);
         bp.add(bFree);
-        if(ConfigService.modeValue.equals("安全模式")){
-            bSafe.setSelected(true);
-        }else bFree.setSelected(true);
 
         JPanel p = new JPanel();
         p.setLayout(new GridLayout(6,1,20,20));
@@ -63,7 +60,21 @@ public class configPanel extends JPanel {
         return p;
     }
 
-    private void addListener(){
+    @Override
+    public void updateData() {
+        ConfigService.init();
+        tBudget.setText(ConfigService.budgetValue);
+        if(ConfigService.modeValue.equals("安全模式")){
+            bSafe.setSelected(true);
+        }
+        else{
+            bFree.setSelected(true);
+        }
+        tMysqlPath.setText(ConfigService.mysqlPathValue);
+    }
+
+    @Override
+    public void addListener(){
         ConfigResetListener configResetListener = new ConfigResetListener();
         bReset.addActionListener(configResetListener);
         ConfigUpdateListener configUpdateListener = new ConfigUpdateListener();

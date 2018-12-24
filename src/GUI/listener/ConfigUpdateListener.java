@@ -34,10 +34,14 @@ public class ConfigUpdateListener implements ActionListener {
             }
         }
 
-        ConfigService cs = new ConfigService();
-        cs.update(ConfigService.budget,panel.tBudget.getText());
-        cs.update(ConfigService.mode,panel.bSafe.isSelected()?panel.bSafe.getText():panel.bFree.getText());
-        cs.update(ConfigService.mysqlPath,panel.tMysqlPath.getText());
+//        ConfigService cs = new ConfigService();
+//        cs.update(ConfigService.budget,panel.tBudget.getText());
+//        cs.update(ConfigService.mode,panel.bSafe.isSelected()?panel.bSafe.getText():panel.bFree.getText());
+//        cs.update(ConfigService.mysqlPath,panel.tMysqlPath.getText());
+        ConfigService.update(ConfigService.budget,panel.tBudget.getText());
+        ConfigService.update(ConfigService.mode,panel.bSafe.isSelected()?panel.bSafe.getText():panel.bFree.getText());
+        ConfigService.update(ConfigService.mysqlPath,panel.tMysqlPath.getText());
+        panel.updateData();
         JOptionPane.showMessageDialog(panel,"更新设置成功");
     }
 }

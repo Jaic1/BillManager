@@ -12,6 +12,8 @@ public class ToolBarListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         mainPanel p = mainPanel.instance;
         JButton button = (JButton) e.getSource();
+
+        //可以把updateDate方法合并到centerPanel的show方法中
         if(button == p.bOverview){
             p.workingPanel.show(overviewPanel.instance);
         }
@@ -19,13 +21,14 @@ public class ToolBarListener implements ActionListener {
             p.workingPanel.show(recordPanel.instance);
         }
         if(button == p.bCategory){
-
+//            categoryPanel.instance.updateData();
             p.workingPanel.show(categoryPanel.instance);
         }
         if(button == p.bReport){
             p.workingPanel.show(reportPanel.instance);
         }
         if(button == p.bConfig){
+//            configPanel.instance.updateData();
             p.workingPanel.show(configPanel.instance);
         }
         if(button == p.bBackup){

@@ -82,6 +82,6 @@ public class CategoryListener implements ActionListener {
             new CategoryService().delete(category.getId());
         }
 
-        panel.update();
+        panel.updateData();
     }
 }

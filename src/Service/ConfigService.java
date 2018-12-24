@@ -16,12 +16,9 @@ public class ConfigService {
     public static ConfigDAO configDAO = new ConfigDAO();
 
 
-    //初始化
-    static {
-        init();
-    }
+    //初始化+刷新时查询
     public static void init(){
-        budgetValue =init(budget,budgetDefaultValue);
+        budgetValue = init(budget,budgetDefaultValue);
         modeValue = init(mode,modeDefaultValue);
         mysqlPathValue = init(mysqlPath,mysqlPathDefaultValue);
     }
@@ -37,7 +34,7 @@ public class ConfigService {
     }
 
     //更新
-    public void update(String key,String value){
+    public static void update(String key,String value){
         Config config = configDAO.getByKey(key);
         if(config != null){
             config.setValue(value);
@@ -46,14 +43,14 @@ public class ConfigService {
     }
 
     //重置
-    public void reset(){
+    public static void reset(){
         update(budget,budgetDefaultValue);
         update(mode,modeDefaultValue);
         update(mysqlPath,mysqlPathDefaultValue);
     }
 
     //按关键字查询值
-    public String get(String key){
+    public static String get(String key){
         Config config = configDAO.getByKey(key);
         return config.getValue();
     }

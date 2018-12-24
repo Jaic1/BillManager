@@ -10,7 +10,7 @@ import utils.colorUtil;
 import javax.swing.*;
 import java.awt.*;
 
-public class categoryPanel extends JPanel {
+public class categoryPanel extends workingPanel {
     static {
         GUIUtil.useLNF();
     }
@@ -43,7 +43,8 @@ public class categoryPanel extends JPanel {
         return p;
     }
 
-    private void addListener(){
+    @Override
+    public void addListener(){
         CategoryListener categoryListener = new CategoryListener();
         bAdd.addActionListener(categoryListener);
         bEdit.addActionListener(categoryListener);
@@ -60,7 +61,8 @@ public class categoryPanel extends JPanel {
     }
 
     //更新
-    public void update(){
+    @Override
+    public void updateData(){
         categoryModel.cs = new CategoryService().list();
         table.updateUI();
         table.setRowSelectionInterval(0,0);
