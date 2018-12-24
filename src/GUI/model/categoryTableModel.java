@@ -1,18 +1,18 @@
 package GUI.model;
 
+import Entity.Category;
+import Service.CategoryService;
+
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class categoryTableModel implements TableModel {
+public class categoryTableModel extends AbstractTableModel {
     public String[] columnNames = new String[]{"分类名称","消费次数","消费总额","单笔消费上限"};
-    List<String> cs = new ArrayList<>();
+    public List<Category> cs = new CategoryService().list();
 
-    public categoryTableModel() {
-        cs.add("餐饮");
-        cs.add("交通");
-    }
     @Override
     public int getRowCount() {
         return cs.size();
@@ -40,6 +40,15 @@ public class categoryTableModel implements TableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        try {
+            Category category = cs.get(rowIndex);
+            if(category == null)return null;
+            if(columnIndex == 0)return category.getName();
+            else if(columnIndex == 1)return category.getNum();
+            else if(columnIndex == 2)return category.getSum();
+            else if(columnIndex == 3)return category.getUpperBound();
+        }catch (IndexOutOfBoundsException e){
+        }
         return null;
     }
 

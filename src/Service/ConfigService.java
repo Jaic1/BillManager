@@ -6,10 +6,13 @@ import Entity.Config;
 public class ConfigService {
     public static final String budget = "budget";
     public static final String budgetDefaultValue = "0";
-    public static final String mode = "model";
+    public static final String mode = "mode";
     public static final String modeDefaultValue = "安全模式";
     public static final String mysqlPath = "mysqlPath";
     public static final String mysqlPathDefaultValue = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysql.exe";
+    public static String budgetValue;
+    public static String modeValue;
+    public static String mysqlPathValue;
     public static ConfigDAO configDAO = new ConfigDAO();
 
 
@@ -18,11 +21,11 @@ public class ConfigService {
         init();
     }
     public static void init(){
-        init(budget,budgetDefaultValue);
-        init(mode,modeDefaultValue);
-        init(mysqlPath,mysqlPathDefaultValue);
+        budgetValue =init(budget,budgetDefaultValue);
+        modeValue = init(mode,modeDefaultValue);
+        mysqlPathValue = init(mysqlPath,mysqlPathDefaultValue);
     }
-    private static void init(String key,String value){
+    private static String init(String key,String value){
         Config config = configDAO.getByKey(key);
         if(config == null){
             config = new Config();
@@ -30,6 +33,7 @@ public class ConfigService {
             config.setValue(value);
             configDAO.add(config);
         }
+        return config.getValue();
     }
 
     //更新
