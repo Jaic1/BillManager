@@ -63,7 +63,7 @@ public class categoryPanel extends workingPanel {
     //更新
     @Override
     public void updateData(){
-        categoryModel.cs = new CategoryService().list();
+        categoryModel.cs = CategoryService.list();
         table.updateUI();
         table.setRowSelectionInterval(0,0);
         if(categoryModel.cs.size() == 0){

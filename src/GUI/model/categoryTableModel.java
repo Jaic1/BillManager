@@ -48,6 +48,7 @@ public class categoryTableModel extends AbstractTableModel {
             else if(columnIndex == 2)return category.getSum();
             else if(columnIndex == 3)return category.getUpperBound();
         }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
         }
         return null;
     }

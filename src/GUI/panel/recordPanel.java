@@ -1,6 +1,9 @@
 package GUI.panel;
 
+import Entity.Category;
+import GUI.listener.RecordListener;
 import GUI.model.categoryComboBoxModel;
+import Service.CategoryService;
 import org.jdesktop.swingx.JXDatePicker;
 import utils.GUIUtil;
 import utils.colorUtil;
@@ -9,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 
-public class recordPanel extends JPanel {
+public class recordPanel extends workingPanel {
     static {
         GUIUtil.useLNF();
     }
@@ -23,7 +26,7 @@ public class recordPanel extends JPanel {
 
     public JTextField spend = new JTextField();
     public categoryComboBoxModel categoryModel = new categoryComboBoxModel();
-    public JComboBox<String> categoryBox = new JComboBox<>(categoryModel);
+    public JComboBox<Category> categoryBox = new JComboBox<>(categoryModel);
     public JTextField comment = new JTextField();
     public JXDatePicker datepick = new JXDatePicker(new Date());
     public JButton b = new JButton("记一下");
@@ -32,6 +35,7 @@ public class recordPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(input(), BorderLayout.CENTER);
         this.add(submit(), BorderLayout.SOUTH);
+        addListener();
     }
 
     private JPanel input(){
@@ -57,7 +61,25 @@ public class recordPanel extends JPanel {
         return p;
     }
 
+    @Override
+    public void updateData() {
+        categoryModel.categories = CategoryService.list();
+        categoryBox.updateUI();
+        if(!categoryModel.categories.isEmpty()) {
+            categoryBox.setSelectedIndex(0);
+        }
+        spend.setText("");
+        comment.setText("");
+        datepick.setDate(new Date());
+    }
+
+    @Override
+    public void addListener() {
+        b.addActionListener(new RecordListener());
+    }
+
     public static void main(String[] args) {
         GUIUtil.testComponent(recordPanel.instance, 1.0f);
     }
+
 }

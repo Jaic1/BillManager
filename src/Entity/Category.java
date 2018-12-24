@@ -17,4 +17,10 @@ public class Category {
     public float getSum(){return this.sum;}
     public void setUpperBound(float upperBound){this.upperBound = upperBound;}
     public float getUpperBound(){return this.upperBound;}
+
+    //不写的话在categoryComboBoxModel里无法正常显示名字
+    @Override
+    public String toString(){
+        return name;
+    }
 }
