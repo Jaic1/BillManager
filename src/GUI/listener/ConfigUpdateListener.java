@@ -1,6 +1,5 @@
 package GUI.listener;
 
-import Entity.Config;
 import GUI.panel.configPanel;
 import Service.ConfigService;
 import utils.GUIUtil;

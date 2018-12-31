@@ -10,7 +10,7 @@ import utils.colorUtil;
 import javax.swing.*;
 import java.awt.*;
 
-public class categoryPanel extends workingPanel {
+public class categoryPanel extends workingPanelAbstractClass {
     static {
         GUIUtil.useLNF();
     }
@@ -65,7 +65,7 @@ public class categoryPanel extends workingPanel {
     public void updateData(){
         categoryModel.cs = CategoryService.list();
         table.updateUI();
-        table.setRowSelectionInterval(0,0);
+        //table.setRowSelectionInterval(0,0);
         if(categoryModel.cs.size() == 0){
             bEdit.setEnabled(false);
             bDelete.setEnabled(false);

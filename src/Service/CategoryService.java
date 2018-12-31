@@ -3,15 +3,13 @@ package Service;
 import DAO.CategoryDAO;
 import DAO.RecordDAO;
 import Entity.Category;
+import Entity.Record;
 
 import java.util.Collections;
 import java.util.List;
 
 public class CategoryService {
     public static CategoryDAO categoryDAO = new CategoryDAO();
-    //理想的用法是：
-    //每次new一个CategoryService
-    //然后用list()
 
     //查询全部
     public static List<Category> list(){
@@ -34,6 +32,18 @@ public class CategoryService {
         categoryDAO.add(category);
     }
 
+    //按cid更新相应分类信息，当新增一笔记录时
+    public static void update(int cid,float delta){
+        Category category = categoryDAO.get(cid);
+        try{
+            category.addNum(1);
+            category.addSum(delta);
+            categoryDAO.update(category);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     //改
     public static void update(Category category){
         categoryDAO.update(category);
@@ -42,5 +52,9 @@ public class CategoryService {
     //删
     public static void delete(int id){
         categoryDAO.delete(id);
+    }
+    //按分类删除
+    public static void deleteByCategory(int cid){
+        RecordService.recordDAO.delete(cid);
     }
 }

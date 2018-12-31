@@ -1,9 +1,7 @@
 package GUI.listener;
 
-import Entity.Config;
 import GUI.panel.configPanel;
 import Service.ConfigService;
-import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

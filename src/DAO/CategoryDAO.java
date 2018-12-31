@@ -40,6 +40,16 @@ public class CategoryDAO {
             e.printStackTrace();
         }
     }
+    public void delete(){
+        String deleteSQL = "delete from category";
+        try(Connection connection = databaseUtil.getConnection();
+            Statement s = connection.createStatement();
+        ) {
+            s.execute(deleteSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     //改
     public void update(Category category){

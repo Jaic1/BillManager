@@ -13,8 +13,10 @@ public class Category {
     public String getName(){return this.name;}
     public void setNum(int num){this.num = num;}
     public int getNum(){return this.num;}
+    public void addNum(int cnt){this.num += cnt;}
     public void setSum(float sum){this.sum = sum;}
     public float getSum(){return this.sum;}
+    public void addSum(float delta){this.sum += delta;}
     public void setUpperBound(float upperBound){this.upperBound = upperBound;}
     public float getUpperBound(){return this.upperBound;}
 

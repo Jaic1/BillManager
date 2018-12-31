@@ -3,7 +3,6 @@ package GUI.listener;
 import Entity.Category;
 import GUI.panel.categoryPanel;
 import Service.CategoryService;
-import utils.GUIUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

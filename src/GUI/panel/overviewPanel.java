@@ -1,12 +1,15 @@
 package GUI.panel;
 
+import Service.OverviewInformation;
+import Service.OverviewService;
 import utils.GUIUtil;
 import utils.circleProgressBar;
+import utils.colorUtil;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class overviewPanel extends JPanel{
+public class overviewPanel extends workingPanelAbstractClass{
     static {
         GUIUtil.useLNF();
     }
@@ -21,12 +24,12 @@ public class overviewPanel extends JPanel{
     public JLabel lLeftAverageByDay = new JLabel("日均可用");
     public JLabel lLeftDay = new JLabel("距离月末");
 
-    public JLabel vSpendDay = new JLabel("今日消费");
-    public JLabel vSpendAverageByDay = new JLabel("日均消费");
-    public JLabel vSpendMonth = new JLabel("本月消费");
-    public JLabel vLeftMonth = new JLabel("本月剩余");
-    public JLabel vLeftAverageByDay = new JLabel("日均可用");
-    public JLabel vLeftDay = new JLabel("距离月末");
+    public JLabel vSpendDay = new JLabel();
+    public JLabel vSpendAverageByDay = new JLabel();
+    public JLabel vSpendMonth = new JLabel();
+    public JLabel vLeftMonth = new JLabel();
+    public JLabel vLeftAverageByDay = new JLabel();
+    public JLabel vDayLeft = new JLabel();
 
     private int width;
     private int height;
@@ -35,6 +38,7 @@ public class overviewPanel extends JPanel{
         this.setLayout(new BorderLayout());
         width = this.getWidth();
         height = this.getHeight();
+        setColor();
 
         this.add(centerPart(), BorderLayout.CENTER);
         this.add(southPart(), BorderLayout.SOUTH);
@@ -70,8 +74,39 @@ public class overviewPanel extends JPanel{
         p.add(vSpendMonth);
         p.add(vLeftMonth);
         p.add(vLeftAverageByDay);
-        p.add(vLeftDay);
+        p.add(vDayLeft);
         return p;
+    }
+
+    private void setColor(){
+        GUIUtil.setColor(colorUtil.geryColor, lSpendDay, lSpendAverageByDay, lSpendMonth,
+                lLeftMonth, lLeftAverageByDay, lLeftDay);
+        GUIUtil.setColor(colorUtil.fontColor, vSpendDay, vSpendAverageByDay, vSpendMonth,
+                vLeftMonth, vLeftAverageByDay, vDayLeft);
+    }
+
+    @Override
+    public void updateData() {
+        OverviewInformation info = OverviewService.getInformation();
+        vSpendDay.setText(info.spendToday);
+        vSpendAverageByDay.setText(info.spendAvg);
+        vSpendMonth.setText(info.spendMonth);
+        vLeftMonth.setText(info.leftMonth);
+        vLeftAverageByDay.setText(info.leftByDay);
+        vDayLeft.setText(info.dayLeft);
+        if(info.isOverSpend){
+            GUIUtil.setColor(colorUtil.warningColor, vLeftMonth);
+        }
+        else {
+            GUIUtil.setColor(colorUtil.fontColor, vLeftMonth);
+        }
+        //环形进度条
+        bar.setProgress(info.usePercentage);
+    }
+
+    @Override
+    public void addListener() {
+
     }
 
     public static void main(String[] args) {

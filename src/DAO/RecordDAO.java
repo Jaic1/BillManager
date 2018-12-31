@@ -43,6 +43,18 @@ public class RecordDAO {
             e.printStackTrace();
         }
     }
+    public void deleteThisMonth(){
+        String deleteSQL = "delete from record where date_ >= ? and date_ <= ?";
+        try(Connection connection = databaseUtil.getConnection();
+            PreparedStatement ps = connection.prepareStatement(deleteSQL)
+        ) {
+            ps.setDate(1,dateUtil.util2sql(dateUtil.monthStart()));
+            ps.setDate(2,dateUtil.util2sql(dateUtil.monthEnd()));
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     //按分类删除
     public void deleteByCategory(int cid){
@@ -58,7 +70,7 @@ public class RecordDAO {
 
     //改
     public void update(Record record){
-        String updateSQL = "update record set cid=?, cost=?, comment=?, date=? where id=?";
+        String updateSQL = "update record set cid=?, cost=?, comment_=?, date_=? where id=?";
         try(Connection connection = databaseUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(updateSQL);
         ) {
@@ -85,8 +97,8 @@ public class RecordDAO {
                 record.setId(resultSet.getInt("id"));
                 record.setCid(resultSet.getInt("cid"));
                 record.setCost(resultSet.getFloat("cost"));
-                record.setComment(resultSet.getString("comment"));
-                record.setDate(resultSet.getDate("date"));
+                record.setComment(resultSet.getString("comment_"));
+                record.setDate(resultSet.getDate("date_"));
                 return record;
             }
         } catch (SQLException e) {
@@ -111,8 +123,8 @@ public class RecordDAO {
                 record.setId(resultSet.getInt("id"));
                 record.setCid(resultSet.getInt("cid"));
                 record.setCost(resultSet.getFloat("cost"));
-                record.setComment(resultSet.getString("comment"));
-                record.setDate(resultSet.getDate("date"));
+                record.setComment(resultSet.getString("comment_"));
+                record.setDate(resultSet.getDate("date_"));
                 records.add(record);
             }
         } catch (SQLException e) {
@@ -134,8 +146,8 @@ public class RecordDAO {
                 record.setId(resultSet.getInt("id"));
                 record.setCid(cid);
                 record.setCost(resultSet.getFloat("cost"));
-                record.setComment(resultSet.getString("comment"));
-                record.setDate(resultSet.getDate("date"));
+                record.setComment(resultSet.getString("comment_"));
+                record.setDate(resultSet.getDate("date_"));
                 records.add(record);
             }
         } catch (SQLException e) {
@@ -150,7 +162,7 @@ public class RecordDAO {
     }
     public List<Record> listDay(Date day){
         List<Record> records = new ArrayList<Record>();
-        String listDaySQL = "select * from record where date = ?";
+        String listDaySQL = "select * from record where date_ = ?";
         try(Connection connection = databaseUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(listDaySQL);
         ) {
@@ -161,7 +173,7 @@ public class RecordDAO {
                 record.setId(resultSet.getInt("id"));
                 record.setCid(resultSet.getInt("cid"));
                 record.setCost(resultSet.getFloat("cost"));
-                record.setComment(resultSet.getString("comment"));
+                record.setComment(resultSet.getString("comment_"));
                 record.setDate(day);
                 records.add(record);
             }
@@ -172,12 +184,12 @@ public class RecordDAO {
     }
 
     //按月查询
-    public List<Record> listTomonth(){
+    public List<Record> listMonth(){
         return listDays(dateUtil.monthStart(),dateUtil.monthEnd());
     }
     public List<Record> listDays(Date start,Date end){
         List<Record> records = new ArrayList<Record>();
-        String listDaysSQL = "select * from record where date>=? and date<=?";
+        String listDaysSQL = "select * from record where date_ >= ? and date_ <= ?";
         try(Connection connection = databaseUtil.getConnection();
             PreparedStatement ps = connection.prepareStatement(listDaysSQL);
         ) {
@@ -189,8 +201,8 @@ public class RecordDAO {
                 record.setId(resultSet.getInt("id"));
                 record.setCid(resultSet.getInt("cid"));
                 record.setCost(resultSet.getFloat("cost"));
-                record.setComment(resultSet.getString("comment"));
-                record.setDate(resultSet.getDate("date"));
+                record.setComment(resultSet.getString("comment_"));
+                record.setDate(resultSet.getDate("date_"));
                 records.add(record);
             }
         } catch (SQLException e) {

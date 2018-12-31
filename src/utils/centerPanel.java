@@ -1,6 +1,6 @@
 package utils;
 
-import GUI.panel.workingPanel;
+import GUI.panel.workingPanelAbstractClass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,8 +44,8 @@ public class centerPanel extends JPanel {
             remove(componentTemp);
         }
         add(this.component);
-        if(component instanceof workingPanel){
-            ((workingPanel)component).updateData();
+        if(component instanceof workingPanelAbstractClass){
+            ((workingPanelAbstractClass)component).updateData();
         }
         this.updateUI();
     }

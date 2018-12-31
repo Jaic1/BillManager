@@ -44,6 +44,8 @@ public class ConfigService {
 
     //重置
     public static void reset(){
+        RecordService.recordDAO.deleteThisMonth();
+        CategoryService.categoryDAO.delete();
         update(budget,budgetDefaultValue);
         update(mode,modeDefaultValue);
         update(mysqlPath,mysqlPathDefaultValue);

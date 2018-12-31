@@ -1,12 +1,15 @@
 package GUI.panel;
 
+import sun.java2d.pipe.BufferedBufImgOps;
 import utils.GUIUtil;
 import utils.chartUtil;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class reportPanel extends JPanel {
+public class reportPanel extends workingPanelAbstractClass {
     static {
         GUIUtil.useLNF();
     }
@@ -16,9 +19,20 @@ public class reportPanel extends JPanel {
 
     private reportPanel(){
         this.setLayout(new BorderLayout());
-        Image img = chartUtil.getImage(350,300);
-        label.setIcon(new ImageIcon(img));
-        this.add(label,BorderLayout.CENTER);
+        this.add(label);
+    }
+
+    @Override
+    public void updateData() {
+        System.out.println("why");
+        Image img = chartUtil.getImage(this.getWidth(),this.getHeight());
+        ImageIcon icon = new ImageIcon(img);
+        label.setIcon(icon);
+    }
+
+    @Override
+    public void addListener() {
+
     }
 
     public static void main(String[] args) {

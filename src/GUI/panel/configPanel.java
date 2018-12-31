@@ -9,7 +9,7 @@ import utils.colorUtil;
 import javax.swing.*;
 import java.awt.*;
 
-public class configPanel extends workingPanel {
+public class configPanel extends workingPanelAbstractClass {
     static {
         GUIUtil.useLNF();
     }

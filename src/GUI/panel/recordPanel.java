@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 
-public class recordPanel extends workingPanel {
+public class recordPanel extends workingPanelAbstractClass {
     static {
         GUIUtil.useLNF();
     }
@@ -76,6 +76,11 @@ public class recordPanel extends workingPanel {
     @Override
     public void addListener() {
         b.addActionListener(new RecordListener());
+    }
+
+    //获取当前选取的分类
+    public Category getSelectedCategory(){
+        return (Category)categoryBox.getSelectedItem();
     }
 
     public static void main(String[] args) {
