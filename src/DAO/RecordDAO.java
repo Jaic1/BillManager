@@ -43,6 +43,16 @@ public class RecordDAO {
             e.printStackTrace();
         }
     }
+    public void delete(){
+        String deleteSQL = "delete from record";
+        try(Connection connection = databaseUtil.getConnection();
+            Statement s = connection.createStatement();
+        ) {
+            s.execute(deleteSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void deleteThisMonth(){
         String deleteSQL = "delete from record where date_ >= ? and date_ <= ?";
         try(Connection connection = databaseUtil.getConnection();

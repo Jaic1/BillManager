@@ -66,9 +66,11 @@ public class configPanel extends workingPanelAbstractClass {
         tBudget.setText(ConfigService.budgetValue);
         if(ConfigService.modeValue.equals("安全模式")){
             bSafe.setSelected(true);
+            bReset.setEnabled(false);
         }
         else{
             bFree.setSelected(true);
+            bReset.setEnabled(true);
         }
         tMysqlPath.setText(ConfigService.mysqlPathValue);
     }

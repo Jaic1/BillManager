@@ -29,6 +29,7 @@ public class ToolBarListener implements ActionListener {
         if(button == p.bReport){
             p.workingPanel.show(reportPanel.instance);
             p.workingPanel.setBackground(colorUtil.backgroundColor);
+            reportPanel.instance.updateData();
         }
         if(button == p.bConfig){
             p.workingPanel.show(configPanel.instance);

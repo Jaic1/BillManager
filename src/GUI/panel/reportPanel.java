@@ -24,7 +24,7 @@ public class reportPanel extends workingPanelAbstractClass {
 
     @Override
     public void updateData() {
-        System.out.println("why");
+        //System.out.println("why it don't show the first time");
         Image img = chartUtil.getImage(this.getWidth(),this.getHeight());
         ImageIcon icon = new ImageIcon(img);
         label.setIcon(icon);

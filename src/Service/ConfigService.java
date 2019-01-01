@@ -9,7 +9,7 @@ public class ConfigService {
     public static final String mode = "mode";
     public static final String modeDefaultValue = "安全模式";
     public static final String mysqlPath = "mysqlPath";
-    public static final String mysqlPathDefaultValue = "C:\\Program Files\\MySQL\\MySQL Server 5.5\\bin\\mysql.exe";
+    public static final String mysqlPathDefaultValue = "C:\\Program Files\\MySQL\\MySQL Server 5.5";
     public static String budgetValue;
     public static String modeValue;
     public static String mysqlPathValue;
@@ -39,12 +39,24 @@ public class ConfigService {
         if(config != null){
             config.setValue(value);
             configDAO.update(config);
+            switch (key){
+                case "budget":budgetValue = value;break;
+                case "mode":modeValue = value;break;
+                case "mysqlPath":mysqlPathValue = value;break;
+            }
         }
     }
 
     //重置
-    public static void reset(){
+    public static void resetWithCategoryConserved(){
         RecordService.recordDAO.deleteThisMonth();
+        CategoryService.reset();
+        update(budget,budgetDefaultValue);
+        update(mode,modeDefaultValue);
+        update(mysqlPath,mysqlPathDefaultValue);
+    }
+    public static void resetWithoutCategoryConserved(){
+        RecordService.recordDAO.delete();
         CategoryService.categoryDAO.delete();
         update(budget,budgetDefaultValue);
         update(mode,modeDefaultValue);

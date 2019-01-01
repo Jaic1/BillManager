@@ -3,6 +3,7 @@ package GUI.listener;
 import Entity.Category;
 import GUI.panel.categoryPanel;
 import Service.CategoryService;
+import Service.ConfigService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,7 @@ public class CategoryListener implements ActionListener {
         JButton button = (JButton)e.getSource();
         if(button == panel.bAdd){
             String name;
+            String upperBound;
             do {
                 name = JOptionPane.showInputDialog("请输入新增分类的名称");
                 if (name == null) return;
@@ -22,7 +24,18 @@ public class CategoryListener implements ActionListener {
                     JOptionPane.showMessageDialog(panel, "输入不能为空");
                 }else break;
             }while (true);
-            new CategoryService().add(name);
+            do {
+                upperBound = JOptionPane.showInputDialog("请输入单笔上限");
+                if(upperBound == null)return;
+                if(upperBound.length() == 0){
+                    JOptionPane.showMessageDialog(panel,"输入不能为空");
+                }else break;
+            }while (true);
+            try {
+                CategoryService.add(name, Float.parseFloat(upperBound));
+            }catch (Exception e1){
+                e1.printStackTrace();
+            }
         }
         if(button == panel.bEdit){
             Category category = panel.getSelectedCategory();
@@ -43,8 +56,13 @@ public class CategoryListener implements ActionListener {
                     }else break;
                 }while (true);
                 category.setName(name);
-                new CategoryService().update(category);
+                CategoryService.update(category);
             }else if(opt == 1){
+                if(ConfigService.modeValue.equals("安全模式")){
+                    JOptionPane.showMessageDialog(panel,"安全模式下不允许修改单笔上限");
+                    return;
+                }
+
                 String upper;
                 Float upperBound;
                 do {
@@ -62,7 +80,7 @@ public class CategoryListener implements ActionListener {
                     }
                 }while (true);
                 category.setUpperBound(upperBound);
-                new CategoryService().update(category);
+                CategoryService.update(category);
             }
         }
         if(button == panel.bDelete){
@@ -71,16 +89,24 @@ public class CategoryListener implements ActionListener {
                 JOptionPane.showMessageDialog(panel,"请选择你要删除的分类");
                 return;
             }
-            if(category.getNum() != 0){
-                JOptionPane.showMessageDialog(panel,"无法删除，请在未消费的情况下删除（每月更新）");
-                return;
+            if(ConfigService.modeValue.equals("安全模式")){
+                if(category.getNum() != 0){
+                    JOptionPane.showMessageDialog(panel,"安全模式下无法删除在本月已消费的分类");
+                    return;
+                }
+                if(JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(panel,"确认删除？")){
+                    return;
+                }
+                CategoryService.delete(category.getId());
             }
-            if(JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(panel,"确认删除？")){
-                return;
+            else if(ConfigService.modeValue.equals("自由模式")){
+                if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(panel,
+                        "删除则相应分类下的消费记录均被删除，确认删除？")){
+                    CategoryService.deleteRecordByCategory(category.getId());
+                    CategoryService.delete(category.getId());
+                }
             }
-            new CategoryService().delete(category.getId());
         }
-
         panel.updateData();
     }
 }

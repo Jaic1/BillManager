@@ -1,11 +1,12 @@
 package GUI.panel;
 
+import GUI.listener.RecoverListener;
 import utils.GUIUtil;
 import utils.colorUtil;
 
 import javax.swing.*;
 
-public class recoverPanel extends JPanel {
+public class recoverPanel extends workingPanelAbstractClass {
     static {
         GUIUtil.useLNF();
     }
@@ -15,9 +16,19 @@ public class recoverPanel extends JPanel {
 
     private recoverPanel(){
         GUIUtil.setColor(colorUtil.blueColor, b);
-        b.setBounds((getWidth()- b.getWidth())/2,(getHeight()- b.getHeight())/2,
-                b.getWidth(), b.getHeight());
         this.add(b);
+        addListener();
+    }
+
+    @Override
+    public void updateData() {
+
+    }
+
+    @Override
+    public void addListener() {
+        RecoverListener recoverListener = new RecoverListener();
+        b.addActionListener(recoverListener);
     }
 
     public static void main(String[] args) {

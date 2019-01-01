@@ -26,4 +26,16 @@ public class OverviewService {
         return new OverviewInformation((int)spendToday,(int)spendMonth,
                 (int)budget,daysUp,daysThisMonth-daysUp);
     }
+
+    public static int getSpendThisMonth(){
+        float spendMonth = 0.0f;
+        for (Record record:RecordService.recordDAO.listMonth()){
+            spendMonth += record.getCost();
+        }
+        return (int)spendMonth;
+    }
+    public static int getBudget(){
+        float budget = Float.parseFloat(ConfigService.budgetValue);
+        return (int)budget;
+    }
 }
