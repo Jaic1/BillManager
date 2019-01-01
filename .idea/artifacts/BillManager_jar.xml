@@ -7,7 +7,10 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/swingx-core-1.6.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/pgslookandfeel-1.1.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/mysql-connector-java-5.0.8-bin.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/2641a26f-11be-446b-bc4a-e6ef3d25292d.zip" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/chart.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/swingx-core-1.6.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/pgslookandfeel-1.1.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/lib/mysql-connector-java-5.0.8-bin.jar" />
     </root>
   </artifact>
 </component>
