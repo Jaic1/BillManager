@@ -23,7 +23,7 @@ public class mainPanel extends JPanel {
     public JButton bBackup = new JButton();
     public JButton bRecover = new JButton();
     public centerPanel workingPanel = new centerPanel(0.86);
-
+                                                       
     private mainPanel(){
         GUIUtil.setImgIcon(bOverview,"home.png","血腥场面");
         GUIUtil.setImgIcon(bRecord,"record.png","剁一只");

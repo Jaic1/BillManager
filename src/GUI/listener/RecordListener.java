@@ -60,6 +60,14 @@ public class RecordListener implements ActionListener {
                 }
             }
         }
+        if(ConfigService.modeValue.equals("自由模式")){
+            if((float)spend > category.getUpperBound()) {
+                if(JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(panel,
+                        category.getName() + "单笔消费不能超过" + category.getUpperBound() + "元，是否继续")) {
+                    return;
+                }
+            }
+        }
         Record record = new Record();
         record.setCid(category.getId());
         record.setCost((float)spend);

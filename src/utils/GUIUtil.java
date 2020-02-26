@@ -10,7 +10,8 @@ import java.io.File;
 import static javax.swing.UIManager.*;
 
 public class GUIUtil {
-    private static String imgFolder = "D:\\Idea-workspace\\BillManager\\img";
+    //private static String imgFolder = "D:\\Idea-workspace\\BillManager\\img";
+    private static String imgFolderName = "img";
     private static String LNF = "com.pagosoft.plaf.PgsLookAndFeel";
     //需要添加到配置表中
 
@@ -39,7 +40,9 @@ public class GUIUtil {
     }
 
     public static void setImgIcon(JButton b,String filename,String tip){
-        ImageIcon i = new ImageIcon(new File(imgFolder, filename).getAbsolutePath());
+        File file = new File("");
+        File imgFolder = new File(file.getAbsolutePath(), imgFolderName);
+        ImageIcon i = new ImageIcon(new File(imgFolder.getAbsolutePath(), filename).getAbsolutePath());
         b.setIcon(i);
         b.setPreferredSize(new Dimension(61,81));
         b.setToolTipText(tip);
